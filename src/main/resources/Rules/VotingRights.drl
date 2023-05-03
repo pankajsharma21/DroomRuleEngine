@@ -1,0 +1,17 @@
+global com.DroomRuleEngine.DroomRuleEngine.DTO.VoterVerificationDTO voter;
+dialect "mvel"
+rule "Verify Voter Age"
+when
+    VoterVerificationDTO(age >= 18)
+then
+    voter.setEligibleToVote(true);
+    System.out.println("Voter " + voter.getName() + " is eligible to vote.");
+end
+
+rule "Ineligible Voter"
+when
+    VoterVerificationDTO(age < 18)
+then
+    voter.setEligibleToVote(false);
+    System.out.println("Voter " + voter.getName() + " is not eligible to vote.");
+end
